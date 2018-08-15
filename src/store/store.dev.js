@@ -2,11 +2,17 @@ import { createStore, applyMiddleware } from 'redux'
 import ReduxThunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import persistState from 'redux-localstorage'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
+import { createBrowserHistory } from 'history'
+
 import rootReducer from '../rootReducer'
+
+export const history = createBrowserHistory()
 
 export default (initialState = {}) => {
   const middlewares = [
     ReduxThunk,
+    routerMiddleware(history)
   ]
   const enhancers = [
     applyMiddleware(...middlewares),
@@ -18,7 +24,7 @@ export default (initialState = {}) => {
     // Specify here other options if needed
   })
   const store = createStore(
-    rootReducer,
+    connectRouter(history)(rootReducer),
     initialState,
     composeEnhancers(...enhancers),
   )

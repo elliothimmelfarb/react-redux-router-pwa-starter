@@ -1,11 +1,9 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
-// import { ConnectedRouter } from 'react-router-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
-// import { history } from './store/store.dev'
+import { ConnectedRouter } from 'connected-react-router'
 
 import Welcome from './_Welcome'
+import { history } from './store/store.dev'
 
 // Register routes to the application by adding a record below
 export const routeRoster = [
@@ -27,11 +25,13 @@ function Router() {
   ))
 
   return (
-    <BrowserRouter>
-      <div>
-        { routes }
-      </div>
-    </BrowserRouter>
+    <ConnectedRouter history={ history }>
+      <BrowserRouter>
+        <div>
+          { routes }
+        </div>
+      </BrowserRouter>
+    </ConnectedRouter>
   )
 }
 

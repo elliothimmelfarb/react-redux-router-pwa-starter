@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
+import { routerReducer } from 'react-router-redux'
 
-import { reducer as Welcome } from './_Welcome'
+import welcome from './_Welcome/duck'
 
 export default combineReducers({
-  Welcome,
+  welcome,
+  routing: routerReducer,
 })
